@@ -3,7 +3,6 @@ import snowflake.connector
 import requests
 import pandas
 
-
 streamlit.title('My parents new healthy dinner')
 streamlit.header('Breakfast Menu')
 streamlit.text('Omega 3 & Blueberry Oatmeal')
@@ -13,7 +12,6 @@ streamlit.text('Hard-boiled Free Egg Range')
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
 my_fruit_list=pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
-
 my_fruit_list = my_fruit_list.set_index('Fruit')
 
 # Let's put a pick list here so they can pick the fruit they want to include 
@@ -42,12 +40,13 @@ my_cur = my_cnx.cursor()
 my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
 my_cur.execute("select * from fruit_load_list")
 my_data_row = my_cur.fetchall()
+
 streamlit.header("The fruit load list contains")
 streamlit.dataframe(my_data_row)
 add_my_fruit = streamlit.text_input('What fruit would you like information about?','Jackfruit')
 streamlit.write('Thanks for adding ', add_my_fruit)
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+add_my_fruit)
+my_cur.execute("insert into fruit_load_list values('from streamlit')")
 
-##streamlit.text("Hello from Snowflake:")
 
 
