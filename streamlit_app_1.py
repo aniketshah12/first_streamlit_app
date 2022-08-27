@@ -21,7 +21,7 @@ fruits_selected=streamlit.multiselect("Pick some fruits:", list(my_fruit_list.in
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 
 # Display the table on the page.
-streamlit.dataframe(fruits_selected)
+streamlit.dataframe(fruits_to_show)
 
 #New section to display fruityvice api response
 streamlit.header("Fruityvice Fruit Advice!")
